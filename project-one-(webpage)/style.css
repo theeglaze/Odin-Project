@@ -1,0 +1,38 @@
+.head-color{
+    background-color: #1f2937;
+    color: #F9FAF8;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.header{
+    display: flex;
+}
+
+.logo{
+    margin-right: auto;
+    max-width: 100px;
+    max-height: 75%;
+    border-radius: 50%;
+}
+
+.logo img{
+    width: 100px;
+    height: 75%;
+    object-fit: contain;
+}
+
+.links ul{
+    display: flex;
+    list-style-type: none;
+    gap: 100px;
+   
+}
+
+.links a{
+    text-decoration: none;
+    color: #E5E7EB;
+    width: 40px;
+   
+}
