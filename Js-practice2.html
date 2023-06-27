@@ -1,0 +1,81 @@
+<!DOCTYPE hmtl>
+
+<html lang ="en-us">
+
+    <head>
+
+        <meta charset ="UTF-8">
+        <meta name = "viewport" content ="width = device-width">
+        <title>JS Practice 2</title>
+
+    </head>
+    
+    <body>
+
+        <script>
+
+            // Add a number to seven.
+            function add7()
+                {
+                    let num = prompt("Enter a number");
+                    num = +num;
+                    num += 7;
+
+                    alert(` The result is ${num}`);
+                    console.log(` The result is ${num}`);
+
+                    return num;
+
+                }
+
+                add7();
+
+                //Multiply two numbers.
+                function multiply ()
+
+                {
+                    let num1 = prompt("Enter a number");
+                    let num2 = prompt("Enter a number");
+                    
+                    let num3 = num1 * num2;
+
+                    alert(` The result is ${num3}`);
+                    console.log(` The result is ${num3}`);
+
+                    return num3;
+                    
+                }
+                
+                multiply();
+            
+            // Change the first letter in a string to capital.
+            function capitalize ()
+                {
+                    let string = prompt( "Enter a string");
+                    let firstLetter = string.slice(0,1);
+                    let change = firstLetter.toUpperCase();
+                   newString = string.replace(firstLetter,change);
+
+                   alert (newString);
+                }
+                
+                capitalize(); 
+
+                //Output the last character in a string.
+                function lastLetter ()
+
+                    {
+                    let string = prompt( "Enter a string");
+                    let lastLetter = string.slice(-1);
+                    
+                    alert(` The result is ${lastLetter}`);
+                    console.log(` The result is ${lastLetter}`);
+                    }
+
+                    lastLetter();
+
+        </script>
+
+    </body>
+
+</html>
