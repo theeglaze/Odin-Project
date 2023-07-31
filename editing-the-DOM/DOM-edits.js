@@ -29,3 +29,15 @@ boxPara.textContent = "ME TOO!";
 box.appendChild(boxHead)
 box.appendChild(boxPara);
 container.appendChild(box);
+
+// Button 
+
+function alertFunction(){
+    alert("YAY1 YOU DID IT!");
+}
+
+const btn = document.querySelector('#btn');
+btn.onclick =alertFunction;
+
+const btn1 = document.querySelector('#btn1');
+btn1.addEventListener('click',function(e){e.target.style.background ='blue'});
