@@ -40,14 +40,14 @@ function Evaluation(user = PlayerSelection(), computer = ComputerSelector() )
     if (user === "ROCK" && computer === "SCISSORS")
     {
    
-        alert("The user wins :)")  
+        result("user"); 
         return "user won"; 
     }
    
    else if (user === "PAPER" && computer === "ROCK")
     {
     
-        alert("The user wins :)") 
+        result("user");
         return "user won";
 
     }
@@ -55,7 +55,7 @@ function Evaluation(user = PlayerSelection(), computer = ComputerSelector() )
     else if (user === "SCISSORS" && computer === "PAPER")
     {
    
-         alert("The user wins :)") 
+        result("user");
          return "user won";
     }
 
@@ -63,17 +63,47 @@ function Evaluation(user = PlayerSelection(), computer = ComputerSelector() )
     
     {
     
-        alert("There is a tie :)") 
+        result("tie");
         return "tie";
     }
     
     else 
     {
     
-        alert("The computer wins ;)")
+        result("computer");
         return "computer won";
     }
     
+}
+
+function result(result)
+{
+    var display, para; 
+
+    switch(result)
+    {
+
+      case "user":
+            display = document.querySelector('.result');
+            para = document.createElement('p');
+            para.textContent = 'The User Won';
+            display.appendChild(para);
+            break;
+
+        case "computer":
+            display = document.querySelector('.result');
+            para = document.createElement('p');
+            para.textContent = 'The Computer Won';
+            display.appendChild(para);
+            break;
+
+        case "tie": 
+            display = document.querySelector('.result');
+            para = document.createElement('p');
+            para.textContent = 'There Was A Tie';
+            display.appendChild(para);
+            break;
+    }
 }
 
 function PlayGame()
@@ -128,6 +158,47 @@ function PlayGame()
     console.log(`The user won: ${user_wins} games`);
     console.log(`The computer won: ${computer_wins} games`);
 }
+
+
+// TOP EXERCISE ADDING UI (AUG 7, 2023).
+ 
+const buttons = document.querySelector('.buttons');
+
+ buttons.addEventListener('click', (e)=> {
+
+    Evaluation(e.target.textContent);
+
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 /* Below is an attempt at using the ternary operator in the evaluation function.
