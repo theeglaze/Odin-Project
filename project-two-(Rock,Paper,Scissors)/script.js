@@ -40,68 +40,69 @@ function Evaluation(user = PlayerSelection(), computer = ComputerSelector() )
     if (user === "ROCK" && computer === "SCISSORS")
     {
    
-        result("user"); 
-        return "user won"; 
+        roundWinner("user"); 
+        return "1"; 
     }
    
    else if (user === "PAPER" && computer === "ROCK")
     {
     
-        result("user");
-        return "user won";
+        roundWinner("user");
+        return "1";
 
     }
 
     else if (user === "SCISSORS" && computer === "PAPER")
     {
    
-        result("user");
-         return "user won";
+        roundWinner("user");
+         return "1";
     }
 
     else if (user === computer) 
     
     {
     
-        result("tie");
-        return "tie";
+        roundWinner("tie");
+        return "3";
     }
     
     else 
     {
     
-        result("computer");
-        return "computer won";
+        roundWinner("computer");
+        return "2";
     }
     
 }
 
-function result(result)
+function roundWinner(victor)
 {
-    var display, para; 
+    var victor, para; 
+   // victor = document.querySelector('.victor');
 
-    switch(result)
+    switch(victor)
     {
 
       case "user":
-            display = document.querySelector('.result');
+            victor = document.querySelector('.victor');
             para = document.createElement('p');
             para.textContent = 'The User Won';
-            display.appendChild(para);
+            victor.appendChild(para);
             break;
 
         case "computer":
-            display = document.querySelector('.result');
+            victor = document.querySelector('.victor');
             para = document.createElement('p');
             para.textContent = 'The Computer Won';
-            display.appendChild(para);
+            victor.appendChild(para);
             break;
 
         case "tie": 
-            display = document.querySelector('.result');
+            victor = document.querySelector('.victor');
             para = document.createElement('p');
             para.textContent = 'There Was A Tie';
-            display.appendChild(para);
+            victor.appendChild(para);
             break;
     }
 }
@@ -160,18 +161,54 @@ function PlayGame()
 }
 
 
-// TOP EXERCISE ADDING UI (AUG 7, 2023).
- 
+// TOP EXERCISE ADDING UI (AUG 7, 2023). 
+
 const buttons = document.querySelector('.buttons');
 
  buttons.addEventListener('click', (e)=> {
 
-    Evaluation(e.target.textContent);
+    let winner = Evaluation(e.target.textContent);
+
+    count(winner); 
 
 });
 
 
+function count(winner)
+{
 
+var playerScore, computerScore;
+
+let p_score = document.querySelector('.playerIcon.score')
+let c_score = document.querySelector('.computerIcon.score')
+let para = document.createElement('p');
+para.textContent = "1";
+p_score.appendChild(para);
+    if(winner === '1')
+    {
+        playerScore += 1;
+        //let para = document.createElement('p');
+       // para.textContent = "1"
+       // p_score.appendChild(para);
+    }
+
+    else if (winner === '2')
+    {
+        computerScore += 1;
+       // c_score.appendChild(computerScore);
+    }
+
+    else if (winner === '3')
+    {
+        console.log('There was a Tie')
+    }
+
+    else 
+    {
+        console.log('Error')
+    }
+    
+}
 
 
 

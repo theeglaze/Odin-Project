@@ -19,17 +19,37 @@ body{
     text-align: center;
 }
 
-.intro{
-    font-size: large;
-}
+/*Styling Buttons */
 
-.closing{
-    display: flex;
-    flex-direction: column;
+.buttons{
+    margin: 48px;
+    justify-content: space-around;
     align-items: center;
 }
 
-.closing :first-child{
-    font-size: medium;
-    font-weight: 700;
+
+/*Styling of game results*/
+
+.playerIcon IMG{
+    width: 50px;
+    height: auto;
+}
+
+.computerIcon IMG{
+    width:50px;
+    height: auto;
+}
+
+.score{
+    justify-content: space-around;
+    align-items: center;
+}
+
+.result{
+    width: 200px;
+    height: auto;
+    display:flex;
+    justify-content: space-around;
+    align-items: center;
+    margin: 24px;
 }
