@@ -123,13 +123,23 @@ async function roundWinner(winner)
 
 const buttons = document.querySelector('.buttons');
 
- buttons.addEventListener('click', (e)=> {
-
+ buttons.addEventListener('click',(e) =>
+{
     let winner = Evaluation(e.target.textContent);
 
     count(winner); 
-    score();
-});
+
+    if (playerScore === 5)
+    {
+        score(1)
+    }
+
+    else if (computerScore === 5)
+    {
+        score(2)
+    } 
+ });
+
 
 //Global Variables:
 
@@ -167,51 +177,58 @@ function count(winner)
     
 }
 
-//To be Completed 
+//Displays the score and the winner of the game. 
 
-async function score()
+async function score(option)
 {
-await delay(2000);
+await delay(1000);
 
-    if(playerScore === 5)
-    {
+switch(option)
+{
+    case 1:
+    
        victor = document.querySelector('.victor');
         para = document.createElement('p');
         game = document.createElement('p');
         game.textContent = 'Game Over !!!'
         para.textContent = 'User Won';
-        victor.appendChild(game);
         await delay(1500);
+        victor.appendChild(game);
+       // await delay(1000);
         victor.appendChild(para);
         clear();
-    }
+     break;
+    
 
-    else if (computerScore === 5)
-    {
+    case 2: (computerScore === 5)
+    
         victor = document.querySelector('.victor');
         para = document.createElement('p');
         game = document.createElement('p');
         game.textContent = 'Game Over !!!'
         para.textContent = 'Computer Won';
-        victor.appendChild(game);
         await delay(1500);
+        victor.appendChild(game);
+       // await delay(500);
         victor.appendChild(para);
         clear();
+    break;
     }
+}
 
     async function clear()
     {
         playerScore = 0;
         computerScore = 0;
-        await delay(2000)
+        await delay(1500)
         victor.removeChild(game);
         victor.removeChild(para);
-        //playerTally.innerHTML = playerScore;
-        //computerTally.innerHTML = computerScore;
+        playerTally.innerHTML = playerScore;
+        computerTally.innerHTML = computerScore;
     }
 
     
-}
+
 
 // Used to delay the execution of the Script:
  
