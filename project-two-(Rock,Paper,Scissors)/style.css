@@ -28,21 +28,27 @@ body{
 }
 
 
-/*Styling of game results*/
+/*Styling of game Tally*/
 
-.playerIcon IMG{
-    width: 50px;
-    height: auto;
+.playerIcon, .computerIcon{
+
+    display:flex;
+    flex-direction: column;
+    
 }
 
-.computerIcon IMG{
-    width:50px;
+.playerIcon IMG, .computerIcon IMG{
+    max-width: 50px;
     height: auto;
+
 }
 
 .score{
-    justify-content: space-around;
-    align-items: center;
+    width: 20px;
+    height:20px;
+    text-align: center;
+    justify-content: center;
+    align-self: center;
 }
 
 .result{
@@ -52,4 +58,12 @@ body{
     justify-content: space-around;
     align-items: center;
     margin: 24px;
+    flex-wrap: nowrap;
+}
+
+/*Styling Victor Tag*/
+/*Check*/
+.victor{
+    align-items: center;
+    justify-content: center;
 }

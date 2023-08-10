@@ -34,6 +34,11 @@ function PlayerSelection ()
     }
 }
 
+
+// Last Updated: Aug 9, 2023. 
+
+// Evaluates who wins a particular round:
+
 function Evaluation(user = PlayerSelection(), computer = ComputerSelector() )
 
 {
@@ -76,25 +81,26 @@ function Evaluation(user = PlayerSelection(), computer = ComputerSelector() )
     
 }
 
-function roundWinner(victor)
+//Prints winner of Round to Screen: 
+
+async function roundWinner(winner)
 {
     var victor, para; 
-   // victor = document.querySelector('.victor');
 
-    switch(victor)
+    switch(winner)
     {
 
       case "user":
             victor = document.querySelector('.victor');
             para = document.createElement('p');
-            para.textContent = 'The User Won';
+            para.textContent = 'The User Won The Round';
             victor.appendChild(para);
             break;
 
         case "computer":
             victor = document.querySelector('.victor');
             para = document.createElement('p');
-            para.textContent = 'The Computer Won';
+            para.textContent = 'The Computer Won The Round';
             victor.appendChild(para);
             break;
 
@@ -105,63 +111,15 @@ function roundWinner(victor)
             victor.appendChild(para);
             break;
     }
-}
 
-function PlayGame()
-{
-    var user_wins = 0;
-    var computer_wins = 0;
-    var trys = 1;
-
-    while(trys <= 5)
-
-    {
-        console.log(`trial ${trys}`);
-       
-        let score = Evaluation();
-        console.log(`result: ${score}`);
-        
-        (score === "user won") ?
-
-        user_wins += 1 :
-
-        (score === "computer won") ? 
-
-        computer_wins += 1 : 
-
-       (score === "tie") ?
-        
-       console.log("There was a tie"):
-
-       console.log("There was a error with PlayGame()")
-
-
-        trys += 1; 
-        
-    }
-
-    if(user_wins > computer_wins)
-    {
-        alert(`The game belongs to the user, winning ${user_wins} games`);
-    }
-    
-    else if (user_wins < computer_wins)
-    {
-        alert(`The game belongs to the computer, winning ${computer_wins} games`);
-    }    
-    
-
-    else
-    {
-        alert(`The game is a draw, user has = ${user_wins} wins and computer has = ${computer_wins} wins`);
-    }
-
-    console.log(`The user won: ${user_wins} games`);
-    console.log(`The computer won: ${computer_wins} games`);
+     await delay(1250);
+     victor.removeChild(para);
 }
 
 
 // TOP EXERCISE ADDING UI (AUG 7, 2023). 
+
+// Button Event Listen / Handler: 
 
 const buttons = document.querySelector('.buttons');
 
@@ -170,32 +128,31 @@ const buttons = document.querySelector('.buttons');
     let winner = Evaluation(e.target.textContent);
 
     count(winner); 
-
+    score();
 });
 
+//Global Variables:
+
+var playerScore = 0, computerScore = 0;
+
+let playerTally = document.querySelector('.playerIcon .score')
+let computerTally = document.querySelector('.computerIcon .score')
+
+
+// Used to keep Score of User & Computer Wins:
 
 function count(winner)
 {
-
-var playerScore, computerScore;
-
-let p_score = document.querySelector('.playerIcon.score')
-let c_score = document.querySelector('.computerIcon.score')
-let para = document.createElement('p');
-para.textContent = "1";
-p_score.appendChild(para);
     if(winner === '1')
     {
         playerScore += 1;
-        //let para = document.createElement('p');
-       // para.textContent = "1"
-       // p_score.appendChild(para);
+        playerTally.innerHTML = playerScore;
     }
 
     else if (winner === '2')
     {
         computerScore += 1;
-       // c_score.appendChild(computerScore);
+        computerTally.innerHTML = computerScore;
     }
 
     else if (winner === '3')
@@ -210,61 +167,55 @@ p_score.appendChild(para);
     
 }
 
+//To be Completed 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/* Below is an attempt at using the ternary operator in the evaluation function.
-
-The result is inconclusive:
-
-function Evaluation(user = PlayerSelection(), computer = ComputerSelector() )
+async function score()
 {
+await delay(2000);
 
+    if(playerScore === 5)
+    {
+       victor = document.querySelector('.victor');
+        para = document.createElement('p');
+        game = document.createElement('p');
+        game.textContent = 'Game Over !!!'
+        para.textContent = 'User Won';
+        victor.appendChild(game);
+        await delay(1500);
+        victor.appendChild(para);
+        clear();
+    }
 
-    (user === "ROCK") && (computer === "SCISSORS") ?
-   
-     alert("The user wins :)"):  
+    else if (computerScore === 5)
+    {
+        victor = document.querySelector('.victor');
+        para = document.createElement('p');
+        game = document.createElement('p');
+        game.textContent = 'Game Over !!!'
+        para.textContent = 'Computer Won';
+        victor.appendChild(game);
+        await delay(1500);
+        victor.appendChild(para);
+        clear();
+    }
+
+    async function clear()
+    {
+        playerScore = 0;
+        computerScore = 0;
+        await delay(2000)
+        victor.removeChild(game);
+        victor.removeChild(para);
+        //playerTally.innerHTML = playerScore;
+        //computerTally.innerHTML = computerScore;
+    }
 
     
-    (user === "PAPER") && (computer === "ROCK") ?
-
-        alert("The user wins :)"):
-
-    (user === "SCISSORS") && (computer === "PAPER") ?
-
-        alert("The user wins :)"):
-
-    (user === computer) ?
-
-    alert("There is a tie :)"):
-
-    alert("The computer wins ;)")
- 
-    return a; // The value of 'a' should state what happened in the evaluation process.
 }
-    */
+
+// Used to delay the execution of the Script:
+ 
+function delay(ms)
+{
+    return new Promise(resolve => setTimeout (resolve, ms));
+}
