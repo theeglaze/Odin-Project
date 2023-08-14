@@ -13,33 +13,13 @@ function ComputerSelector()
     return computer;
 }
 
-function PlayerSelection ()
-{
-    let user = prompt("Select Rock, Paper or Scissors" );
 
-    user = user.toUpperCase(); // Converts the input to all upper-case letters. Causes function to execute with non case-sensitive inputs.
+// Last Updated: Aug 14, 2023. 
 
-    if(user === "ROCK" || user === "PAPER" || user === "SCISSORS")
-
-    {
-        return user;
-    }
-
-    else
-    
-    {
-        alert("Invalid Input!");
-        PlayerSelection(); // Recursive Function - used to loop application in the event of an invalid input.
-
-    }
-}
-
-
-// Last Updated: Aug 9, 2023. 
 
 // Evaluates who wins a particular round:
 
-function Evaluation(user = PlayerSelection(), computer = ComputerSelector() )
+function Evaluation(user = PlayerSelection(), computer = ComputerSelector())
 
 {
     if (user === "ROCK" && computer === "SCISSORS")
@@ -117,15 +97,26 @@ async function roundWinner(winner)
 }
 
 
-// TOP EXERCISE ADDING UI (AUG 7, 2023). 
+// TOP EXERCISE ADDING UI (AUG 7, 2023 - AUG 14, 2023). 
 
-// Button Event Listen / Handler: 
 
-const buttons = document.querySelector('.buttons');
+// Button Event Listener / Handler: 
 
- buttons.addEventListener('click',(e) =>
+const buttons = document.querySelectorAll('button');
+
+buttons.forEach((button) => 
 {
-    let winner = Evaluation(e.target.textContent);
+    button.addEventListener('click', (event)=> execute(event))
+});
+ 
+
+// Governs the General flow of the game:
+
+ async function execute(event)
+ {
+    ButtonControl("deactivate");
+
+    let winner = Evaluation(event.target.textContent);
 
     count(winner); 
 
@@ -137,8 +128,42 @@ const buttons = document.querySelector('.buttons');
     else if (computerScore === 5)
     {
         score(2)
-    } 
- });
+    }
+
+    await delay(2200);
+
+    ButtonControl("activate")
+ };
+
+
+// Controls the state of the buttons used to play the game:
+
+ function ButtonControl (toggle)
+ {
+    let controls = document.querySelectorAll('button');
+
+    if(toggle === 'deactivate')
+    {
+        for(let i = 0; i < controls.length; i++)
+        {
+            controls[i].disabled = true;
+        }
+    
+    }
+
+    else if (toggle === 'activate')
+    {
+        for(let i = 0; i < controls.length; i++)
+        {
+            controls[i].disabled = false;
+        }
+    }
+
+    else 
+    {
+        console.log("Error !!!!")
+    }
+ }
 
 
 //Global Variables:
@@ -149,7 +174,7 @@ let playerTally = document.querySelector('.playerIcon .score')
 let computerTally = document.querySelector('.computerIcon .score')
 
 
-// Used to keep Score of User & Computer Wins:
+// Used to keep track of User & Computer Wins:
 
 function count(winner)
 {
@@ -192,9 +217,9 @@ switch(option)
         game = document.createElement('p');
         game.textContent = 'Game Over !!!'
         para.textContent = 'User Won';
-        await delay(1500);
+        await delay(750);
         victor.appendChild(game);
-       // await delay(1000);
+        await delay(750);
         victor.appendChild(para);
         clear();
      break;
@@ -207,9 +232,9 @@ switch(option)
         game = document.createElement('p');
         game.textContent = 'Game Over !!!'
         para.textContent = 'Computer Won';
-        await delay(1500);
+        await delay(750);
         victor.appendChild(game);
-       // await delay(500);
+        await delay(750);
         victor.appendChild(para);
         clear();
     break;
@@ -220,7 +245,7 @@ switch(option)
     {
         playerScore = 0;
         computerScore = 0;
-        await delay(1500)
+        await delay(1000)
         victor.removeChild(game);
         victor.removeChild(para);
         playerTally.innerHTML = playerScore;
