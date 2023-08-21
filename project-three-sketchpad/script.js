@@ -1,15 +1,44 @@
-//Formatting page layout:
+//Default Layout:
 
 const sketchArea = document.createElement('div');
 sketchArea.setAttribute('id','sketchArea');
 sketchArea.style.cssText = 'display: flex; width: 1600px; height: 1600px; flex-wrap: wrap; border: 2px red solid; '
 document.body.appendChild(sketchArea);
 
-let cell = [];
 
-// Creating Square Cells on Screen:
+// User Interface:
+ 
+let sizeGrid = document.querySelector('.sizeGrid');
 
-for(let i = 1; i <= 256; i++)
+sizeGrid.addEventListener('click',question);
+
+
+// Creating Grid: 
+
+function question()
+{
+    let squares = prompt("What are the number of squares per side: ");
+    Grid(squares);
+}
+
+
+function Grid(gridSize = 16)
+{
+  gridSize *= 100;
+  sketchArea.style.height = gridSize.toString()+'px';
+  sketchArea.style.width = gridSize.toString()+'px';
+
+  let cell = [];
+
+// Creating Sketch Area:
+
+/* Aug 21, 2023 - Under Construction:
+
+Previous <divs> still exist after grid is resized, however, drawing application is functional. 
+
+*/
+
+for(let i = 1; i <= gridSize; i++)
 {
     cell[i] = document.createElement('div');
     cell[i].classList.add("cell-" + i.toString());
@@ -17,16 +46,23 @@ for(let i = 1; i <= 256; i++)
     sketchArea.appendChild(cell[i]);
 }
 
+HoverEffect();
 
-// Pen Highlighter / hover Effect:
+}
 
-const blocks = document.querySelectorAll('div');
+//Hover Effect:
+
+function HoverEffect()
+{
+
+let blocks = document.querySelectorAll('div');
 
 blocks.forEach((block) =>
 {
     block.addEventListener('mouseover', (event) => Highlight(event, block))
 }
 )
+
 
 function Highlight(event,block)
 
@@ -44,7 +80,4 @@ function Highlight(event,block)
     }
 }
 
-
-// Adding User Interface:
- 
-
+}
