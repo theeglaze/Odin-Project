@@ -17,10 +17,30 @@ sizeGrid.addEventListener('click',question);
 
 function question()
 {
-    let squares = prompt("What are the number of squares per side: ");
-    Grid(squares);
-}
+    let squares = + prompt("What are the number of squares per side: ");
 
+    console.log(typeof(squares));
+    console.log(squares);
+    if( isNaN(squares))
+    {
+        question();
+    }
+
+    else
+    {
+
+        if(squares > 100)
+        {
+            alert("Please enter a smaller amount of squares");
+            question();
+        }
+        
+        else
+        {
+        Grid(squares);
+        } 
+    }
+}
 
 function Grid(squares = 16)
 {
