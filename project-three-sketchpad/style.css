@@ -6,6 +6,13 @@
     background-color: rgb(255, 218, 51);
 }
 
-body.firstChild{
-    background-color:green;
+.control{
+    display: flex;
+    justify-content: center;
+    margin: 12px;
+}
+.sizeGrid{
+    margin: 18px;
+    font-size:large;
+    
 }
