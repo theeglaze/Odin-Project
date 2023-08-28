@@ -86,6 +86,7 @@ function Highlight(event,block)
 
 // Removes previous square cells when the user resizes the grid:
 
+// Rework Clear function: Aug
 function clear()
 {
     let cells = document.querySelectorAll('div');
