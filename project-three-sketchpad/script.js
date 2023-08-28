@@ -1,69 +1,52 @@
-//Default Layout:
-const control = document.querySelector('.control');
-const sketchArea = document.createElement('div');
-sketchArea.setAttribute('id','sketchArea');
-sketchArea.style.cssText = 'display: flex; flex-wrap: wrap; border: 2px red solid; margin-left: auto; margin-right: auto'
-document.body.appendChild(sketchArea);
+//Global Variables:
+
+let sketchArea = document.querySelector('.sketchArea');
+
+// User Interface :
+//(Last Update Aug 28, 2023.)
 
 
-// User Interface:
- 
-let sizeGrid = document.querySelector('.sizeGrid');
+var slider = document.getElementById("myRange");
+var output = document.getElementById("demo");
 
-sizeGrid.addEventListener('click',question);
+//Displays default slider value:
+output.innerHTML = slider.value;
 
+// Update slider value:
 
-// Creating Grid: 
-
-function question()
-{
-    let squares = + prompt("What are the number of squares per side: ");
-
-    console.log(typeof(squares));
-    console.log(squares);
-    if( isNaN(squares))
-    {
-        question();
-    }
-
-    else
-    {
-
-        if(squares > 100)
-        {
-            alert("Please enter a smaller amount of squares");
-            question();
-        }
-        
-        else
-        {
-        Grid(squares);
-        } 
-    }
+slider.oninput = function(){
+    let squares = this.value;
+    output.innerHTML = this.value;
+    Grid(squares)
 }
 
-function Grid(squares = 16)
+/*Building Sketch Area*/
+
+
+function Grid(squares)
 {
-  let numOfSquares = squares ** 2;
-  let gridSize = squares * 102;
-  sketchArea.style.height = gridSize.toString()+'px';
-  sketchArea.style.width = gridSize.toString()+'px';
+  let numOfSquares = +squares;
+  let numOfCells = numOfSquares ** 2;
+  let squareSize = 600 / numOfSquares;
+
 
   let cell = [];
   clear();
 
-
 // Creating Sketch Area:
 
-for(let i = 1; i <= numOfSquares; i++)
-{
+    for(let i = 1; i <= numOfCells ; i++)
+    {
     cell[i] = document.createElement('div');
     cell[i].classList.add("cell-" + i.toString());
-    cell[i].style.cssText = 'width: 100px; height: 100px; border: 0.5px red solid;';
+    cell[i].style.width = squareSize.toString() + "px";
+    cell[i].style.height = squareSize.toString() + "px";
+    cell [i].style.cssText = 'border: 0.5px red solid;';
     sketchArea.appendChild(cell[i]);
-}
+    }
 
-HoverEffect();
+
+//HoverEffect();
 
 }
 
@@ -121,3 +104,52 @@ function clear()
     }
 
 }
+
+
+/*Default Layout:
+const control = document.querySelector('.control');
+const sketchArea = document.createElement('div');
+sketchArea.setAttribute('id','sketchArea');
+sketchArea.style.cssText = 'display: flex; flex-wrap: wrap; border: 2px red solid; margin-left: auto; margin-right: auto'
+document.body.appendChild(sketchArea);
+
+
+
+ 
+let sizeGrid = document.querySelector('.sizeGrid');
+
+sizeGrid.addEventListener('click',question);
+
+
+// Creating Grid: 
+
+function question()
+{
+    let squares = + prompt("What are the number of squares per side: ");
+
+    console.log(typeof(squares));
+    console.log(squares);
+    if( isNaN(squares))
+    {
+        question();
+    }
+
+    else
+    {
+
+        if(squares > 100)
+        {
+            alert("Please enter a smaller amount of squares");
+            question();
+        }
+        
+        else
+        {
+        Grid(squares);
+        } 
+    }
+}
+
+}*/
+
+//Sketch Area;
