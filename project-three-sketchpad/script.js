@@ -16,8 +16,9 @@ output.innerHTML = slider.value;
 
 slider.oninput = function(){
     let squares = this.value;
+    
     output.innerHTML = this.value;
-    Grid(squares)
+   Grid(squares)
 }
 
 /*Building Sketch Area*/
@@ -25,24 +26,30 @@ slider.oninput = function(){
 
 function Grid(squares)
 {
-  let numOfSquares = +squares;
+  let numOfSquares = ~~squares;
   let numOfCells = numOfSquares ** 2;
-  let squareSize = 600 / numOfSquares;
+  let squareSize = ((600 / numOfSquares).toFixed(1)).toString();
+  console.log(squareSize);
 
-
-  let cell = [];
   clear();
 
 // Creating Sketch Area:
 
+  /*  let adjustSketchArea = (numOfCells * 0.5) + 600;
+    sketchArea.style.width = adjustSketchArea.toString() + 'px';
+    sketchArea.style.height = adjustSketchArea.toString() + 'px';
+    console.log(sketchArea.width) */
+
+   
     for(let i = 1; i <= numOfCells ; i++)
     {
-    cell[i] = document.createElement('div');
-    cell[i].classList.add("cell-" + i.toString());
-    cell[i].style.width = squareSize.toString() + "px";
-    cell[i].style.height = squareSize.toString() + "px";
-    cell [i].style.cssText = 'border: 0.5px red solid;';
-    sketchArea.appendChild(cell[i]);
+    cell = document.createElement('div');
+    cell.classList.add("cell-" + i.toString());
+    cell.style.width = squareSize.toString() + 'px';
+    cell.style.height = squareSize.toString() + 'px';
+    cell.style.border = '0.5px red solid';
+    //cell.style.borderBottom = '0.5px red solid';
+    sketchArea.appendChild(cell);
     }
 
 
@@ -89,19 +96,12 @@ function Highlight(event,block)
 // Rework Clear function: Aug
 function clear()
 {
-    let cells = document.querySelectorAll('div');
+    let cells = sketchArea.querySelectorAll('div');
 
     loop: for(let i = 0; i < cells.length; i++)
     {
-        if(cells[i] == sketchArea || cells[i] == control)
-        {
-            continue loop; 
-        }
-
-        else
-        {
             sketchArea.removeChild(cells[i]);
-        }
+        
     }
 
 }
@@ -152,5 +152,3 @@ function question()
 }
 
 }*/
-
-//Sketch Area;
